@@ -10,13 +10,15 @@ import static com.codeborne.selenide.WebDriverRunner.setWebDriver;
 public class TestBase {
 
     public void optionBrowser(String browser) {
+        Configuration.browser = "chrome";
+        ChromeOptions options = new ChromeOptions();
         if ("yandex".equals(browser)) {
-            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
-            Configuration.browser = "chrome";
-            ChromeOptions options = new ChromeOptions();
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/yandexdriver");
             options.setBinary("/Applications/Yandex.app/Contents/MacOS/Yandex");
-            WebDriver webDriver = new ChromeDriver(options);
-            setWebDriver(webDriver);
+        } else {
+            System.setProperty("webdriver.chrome.driver", "src/main/resources/chromedriver");
         }
+        WebDriver webDriver = new ChromeDriver(options);
+        setWebDriver(webDriver);
     }
 }
